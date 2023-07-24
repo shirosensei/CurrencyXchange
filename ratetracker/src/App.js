@@ -13,7 +13,7 @@ function App() {
 
     // skip if currency is not defined
     if (currency) {
-      console.log('fetching exchange rates...')
+      console.log('fetching exchange rates.')
       axios
         .get(`https://open.er-api.com/v6/latest/${currency}`)
         .then(response => {
