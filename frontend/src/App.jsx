@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import './assets/css/App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -15,39 +14,13 @@ function App() {
   }
 
 
-  // const [value, setValue] = useState('')
-  // const [rates, setRates] = useState({})
-  // const [currency, setCurrency] = useState(null)
-
-  // useEffect(() => {
-  //   console.log('effect run, currency is now', currency)
-
-  //   // skip if currency is not defined
-  //   if (currency) {
-  //     console.log('fetching exchange rates.')
-  //     axios
-  //       .get(`https://open.er-api.com/v6/latest/${currency}`)
-  //       .then(response => {
-  //         setRates(response.data.rates)
-  //       })
-  //   }
-  // }, [currency])
-
-  // const handleChange = (event) => {
-  //   setValue(event.target.value)
-  // }
-
-  // const onSearch = (event) => {
-  //   event.preventDefault()
-  //   setCurrency(value)
-  // }
-
+ 
 
   return (
     // <div>
 
       <>
-      <header className="fixed top-0 left-0 right-0 w-full bg-primary-light flex justify-between items-center  p-4 text-customText-primary z-10">
+      <header className="fixed top-0 left-0 right-0 w-full bg-primary-light flex justify-between items-center  p-4 text-text-primary z-10">
 
         <div className='font-bold lg:'>
           <h1 className="">cX Logo</h1>
@@ -65,7 +38,7 @@ function App() {
               <Link to="/help" onClick={() => handleNavClose(false)}>Converter</Link>
             </li>
 
-            <li className='p-4 lg:p-0 hover:bg-disabled hover:text-customText-dark'>
+            <li className='p-4 lg:p-0 hover:bg-disabled hover:text-text-dark'>
               <Link to="/contact" onClick={() => handleNavClose(false)}>
                 Tools
               </Link>
