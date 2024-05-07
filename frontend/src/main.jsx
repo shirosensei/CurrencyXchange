@@ -15,7 +15,11 @@ import Contact from './component/Contact.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-        <BrowserRouter>
+        <BrowserRouter
+         future={{
+          v7_relativeSplatPath: true,
+          v7_startTransition: true,
+        }}>
       <Routes>
         <Route path='/' element={<App />}>
         <Route index element={<Home />} />
