@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import LiveExchangeRates from "./LiveExchangeRates";
 
 const Home = () => {
   const [rates, setRates] = useState({});
@@ -9,19 +10,19 @@ const Home = () => {
 
   const apiKey = import.meta.env.VITE_API_KEY;
 
-  useEffect(() => {
-    console.log("effect run, currency is now", currency);
+  // useEffect(() => {
+  //   console.log("effect run, currency is now", currency);
 
-    // skip if currency is not defined
-    if (currency) {
-      console.log("fetching exchange rates.");
-      axios
-        .get(`https://open.er-api.com/v6/latest/${currency}`)
-        .then((response) => {
-          setRates(response.data.rates);
-        });
-    }
-  }, [currency]);
+  //   // skip if currency is not defined
+  //   if (currency) {
+  //     console.log("fetching exchange rates.");
+  //     axios
+  //       .get(`https://open.er-api.com/v6/latest/${currency}`)
+  //       .then((response) => {
+  //         setRates(response.data.rates);
+  //       });
+  //   }
+  // }, [currency]);
 
   const handleChange = (event) => {
     setCurrency(event.target.value);
@@ -29,7 +30,7 @@ const Home = () => {
 
 
   return (
-    <section className="bg-primary-dark min-h-screen pt-16 custom text-center text-text-primary">
+    <><section className="bg-primary-dark min-h-screen pt-16 custom text-center text-text-primary">
       <h1 className="text-2xl mb-4 font-semibold">
         Currency Xchange Converter{" "}
       </h1>
@@ -122,14 +123,13 @@ const Home = () => {
             <div className="cpnuFh esline !flex !h-full !items-end !border-none !p-0 !pb-2 !shadow-none [&_:is(span.amount-input)]:w-full">
               <span className="fVCqnZ iqYQgf">1.00</span>
               <span className="amount-input inline-flex whitespace-nowrap font-semibold">
-       
+
                 <input
                   type="text"
                   className="fVCqnZ outline-none"
                   // placeholder="1.00"
                   value={currency}
-                  onChange={handleChange}
-                />
+                  onChange={handleChange} />
               </span>
             </div>
             <div className="fkpUOL relative top-1"></div>
@@ -168,8 +168,7 @@ const Home = () => {
                               width: "100%",
                               inset: "0px",
                               color: "transparent",
-                            }}
-                          />
+                            }} />
                         </div>
                         <div className="top-1 flex-grow overflow-hidden text-allipsis whitespace-nowrap text-left">
                           <span className="text-lg font-semibold text-text-secondary">
@@ -257,8 +256,7 @@ const Home = () => {
                             width: "100%",
                             inset: "0px",
                             color: "transparent",
-                          }}
-                        />
+                          }} />
                       </div>
                       <div className="top-1 flex-grow overflow-hidden text-ellipsis whitespace-nowrap text-left">
                         <span className="text-lg font-semibold text-text-secondary">
@@ -292,17 +290,18 @@ const Home = () => {
               </div>
             </div>
           </div>
-      
+
         </div>
         <div></div>
         <div className="flex flex-col items-center gap-6 md:flex-row my-4 justify-end">
-            <button className="order-1 h-fit w-full rounded-lg bg-secondary px-6 py-3 text-base font-semibold text-text-primary transition-colors duration-200 hover:bg-blue-450 md:order-2 md:w-[234px]">
-              Convert
-            </button>
-          </div>
+          <button className="order-1 h-fit w-full rounded-lg bg-secondary px-6 py-3 text-base font-semibold text-text-primary transition-colors duration-200 hover:bg-blue-450 md:order-2 md:w-[234px]">
+            Convert
+          </button>
+        </div>
       </div>
-      
     </section>
+    <LiveExchangeRates baseCurrency="USD" />
+    </>
   );
 };
 
