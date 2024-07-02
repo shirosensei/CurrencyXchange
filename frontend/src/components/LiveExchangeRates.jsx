@@ -1,67 +1,77 @@
 import React, { useState, useEffect } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import {
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+} from "recharts";
 import axios from "axios";
 const apiKey = import.meta.env.VITE_API_KEY;
 
-const currencyIcons = {
-  USD: "🇺🇸",
-  EUR: "🇪🇺",
-  CAD: "🇨🇦",
-  GBP: "🇬🇧",
-  JPY: "🇯🇵",
-  AUD: "🇦🇺",
-};
 
-// Function to get locale day of the date
-const getDayName = (date) => {
-  const options = { weekday: "short" };
-  return new Date(date).toLocaleDateString("en-US", options); 
-}
 
-const LiveExchangeRates = ({ baseCurrency = "USD" }) => {
+
+
+const LiveExchangeRates = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [currencyList, setCurrencyList] = useState([
+    "USD",
+    "GBP",
+    "JPY",
+    "CAD",
+    "EUR",
+  ]); // Default list of selectable currencies
 
-  useEffect(() => {
+  const [selectedCurrency, setSelectedCurrency] = useState("USD");
 
-    const fetchExchangeRates = async () => {
+  const handleSelection = (currency) => {
+    setSelectedCurrency(currency);
+  };
+
+  const fetchExchangeRates = async () => {
+    const days = 30; // Last 30 days
+    const today = new Date();
+    const historicalData = [];
+
+    for (let i = 0; i < days; i++) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      const formattedDate = date.toISOString().split("T")[0];
+
       try {
-        const days = 7; // Last 7 days
-        const today = new Date();
-        const chartData = [];
+        const response = await axios.get(
+          `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`
+        );
 
-        for(let i = 0; i < days; i++) {
-          const date = new Date(today);
-          date.setDate(date.getDate() - i);
-          const formattedDate = getDayName(date);
-
-          const response = await axios.get(`https://api.exchangerate-api.com/v4/latest/${baseCurrency}`)
-
-          const ratesArray = Object.entries(response.data.rates).map(([currency, rate]) => ({
+        const ratesArray = Object.entries(response.data.conversion_rates).map(
+          ([currency, rate]) => ({
             currency,
-            rate
-          }));
-
-          chartData.push(...ratesArray)
-
-          console.log(chartData)
-
-
-          chartData.unshift({
+            rate,
             date: formattedDate,
-            rate: chartData,
-          });     
-        }
-     
-        setData(chartData);
-        setLoading(false)
+          })
+        );
+
+        historicalData.push(...ratesArray); // Add rates for all currencies
       } catch (error) {
-        console.error("Error fetching exchange rates:", error )
+        console.error(`Error fetching data for ${formattedDate}:`, error);
       }
     }
- 
-    fetchExchangeRates();
-  }, [baseCurrency]);
+
+    return historicalData;
+  };
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await fetchExchangeRates();
+      setData(data);
+    };
+
+    loadData();
+  }, []);
 
   return (
     <section className="flex justify-center bg-text-primary py-20">
@@ -74,30 +84,68 @@ const LiveExchangeRates = ({ baseCurrency = "USD" }) => {
             Compare 100+ currencies in real time & find the right moment to make
             the move
           </h3>
+          <h4 className="text-center">Select a Currency</h4>
+        </div>
+
+        <div className="currency-list grid grid-cols-3 gap-4">
+          <select
+            onChange={(e) => handleSelection(e.target.value)}
+            className="currency-button bg-gray-200 p-4 rounded border border-solid  border-secondary shadow hover:bg-gray-300"
+          >
+            {data.map((item, index) => (
+              <option key={index}>{item.currency}</option>
+            ))}
+          </select>
         </div>
         <div>
           <div>
             <div className="m-h-[160px]">
-           
-            
-                <ResponsiveContainer width="100%" height={400}>
-                <LineChart data={data}>
+              {selectedCurrency && (
+                <div className="currency-chart mt-6">
+                  {/* <h3>Chart for {selectedCurrency}</h3> */}
+                  <ResponsiveContainer width="100%" height={200}>
+                    <AreaChart
+                      width={500}
+                      height={200}
+                      // data={mockData}
+                      data={data
+                        .filter((item) => item.currency === selectedCurrency)
+                        .map((entry) => ({
+                          // date: new Date(entry.date).toLocaleDateString(
+                          //   "en-US",
+                          //   { weekday: "short" }
+                          // ), // Ensure `date` is formatted properly
+                          rate: entry.rate, // Use the correct `rate` value
+                        }))}
+                      margin={{
+                        top: 10,
+                        right: 30,
+                        left: 0,
+                        bottom: 0,
+                      }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="date" />
+                      <YAxis />
+                      <Tooltip />
+                      {/* <Legend /> */}
+                      <Area
+                        type="monotone"
+                        dataKey="rate"
+                        stroke="#8884d8"
+                        fill="#8884d8"
+                      />
 
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Line
-                    type="monotone"
-                    dataKey="rate"                    
-                    stroke="#8884d8"
-                    activeDot={{ r: 8 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-        
-             
+                      {/* <Area
+                        type="monotone"
+                        dataKey="rate"
+                        stroke="#8884d8"
+                        activeDot={{ r: 8 }}
+                      /> */}
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -105,8 +153,5 @@ const LiveExchangeRates = ({ baseCurrency = "USD" }) => {
     </section>
   );
 };
-
-
-
 
 export default LiveExchangeRates;
