@@ -5,6 +5,17 @@ import { Link, Outline }  from 'react-router-dom';
 
 
 function App() {
+  const [openNav, setOpenNav] = useState(false);
+
+
+  const handleNavToggle = () => {
+    setOpenNav(true);
+}
+
+const handleNavClose = () => {
+  setOpenNav(false);
+}
+
 
   // const [value, setValue] = useState('')
   // const [rates, setRates] = useState({})
@@ -35,15 +46,33 @@ function App() {
 
 
   return (
-       <div>
-      {/* <form onSubmit={onSearch}>
-        currency: <input value={value} onChange={handleChange} />
-        <button type="submit">exchange rate</button>
-      </form>
-      <pre>
-        {JSON.stringify(rates, null, 2)}
-      </pre> */}
-    </div>
+       <header className='bg-primary-dark flex'>
+        <div>
+          <h1>Logo</h1>
+        </div>
+     
+     <nav className='flex'>
+      <ul>
+        <li>
+          <Link to="/login"  onClick={() => handleNavClose(false)}>Login</Link> 
+        </li>
+        <li>
+          <Link to="/register" onClick={() => handleNavClose(false)}>Register</Link>
+        </li>
+        <li>
+          <Link to="/help" onClick={() => handleNavClose(false)}>Help</Link>
+        </li>
+        <li>
+          <Link to="/about" onClick={() => handleNavClose(false)}>About</Link>
+        </li>
+        <li>
+          <Link to="/contact" onClick={() => handleNavClose(false)}>
+          Contact
+          </Link>
+        </li>
+      </ul>
+     </nav>
+    </header>
   );
 }
 
