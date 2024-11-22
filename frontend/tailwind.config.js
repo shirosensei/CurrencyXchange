@@ -1,29 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    // "./index.html",
+    // "./src/**/*.{js,ts,jsx,tsx}",
+    './src/**/*.{html,js,jsx,ts,tsx}'
   ],
   theme: {
     colors : {
       transparent: 'transparent',
       current: 'currentColor',
-        'primary' : {
-          'dark': '#0C2D48', //moonblue
-          'light' : '#00192E'
+        primary : {
+          dark: '#0C2D48', //moonblue
+          light : '#00192E'
         },
-        'secondary': '#277CA0',
-        'background' : {
-          'light': '#145DA0',
-          'dark': '02427E'
+        secondary: '#277CA0',
+        background : {
+          light: '#145DA0',
+          dark: '#02427E'
         },
-        'text' : {
-          'primary': '#FFFFF',
-          'secondary': '#FFEECF'        
+        customText : {
+          primary: '#FFFF',
+          secondary: '#FFEECF'        
         },
-        'error': '#EA4335',
-        'success': '#34A853', // green
-        'disabled': '#DADCE0' // light grey
+        customGreen: '#10B981',
+        error: '#EA4335',
+        success: '#34A853', // green
+        disabled: '#DADCE0' // light grey
     },
     extend: {
       screens: {
