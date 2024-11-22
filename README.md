@@ -20,37 +20,10 @@ CurrencyXchange is a web application that allows users to compare real-time exch
 
 8. **Real-Time Exchange Rates**: Exchange rates are updated regularly to reflect the latest market data.
 
-## Getting Started
-### Prerequisites
-#### Node.js and npm installed on your machine.
 
-## Installation
-### Clone the repository: 
-
-git clone https://github.com/shirosensei/CurrencyXchange.git
-
-### Navigate to the project directory:
-
-`cd CurrencyXchange`
-
-### Install dependencies:
-
-`npm install`
-
-### Start the development server:
-
-`npm start`
-
-
-Open your web browser and access the application at http://localhost:3000.
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
 
 ## Technologies Used
-### React: Frontend development and user interface.
+### Vite: Frontend development and user interface.
 ### Node.js: Backend server for user authentication and data management.
 ### Express: Web framework for Node.js backend.
 ### MongoDB: Database for storing user information and currency portfolios.

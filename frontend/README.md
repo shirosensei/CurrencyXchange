@@ -1,8 +1,29 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Getting Started
+### Prerequisites
+#### Node.js and npm installed on your machine.
 
-Currently, two official plugins are available:
+## Installation
+### Clone the repository: 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+git clone https://github.com/shirosensei/CurrencyXchange.git
+
+### Navigate to the project directory:
+
+`cd CurrencyXchange`
+
+### Install dependencies:
+
+`npm install`
+
+### Start the development server:
+
+`npm run dev`
+
+
+Open your web browser and access the application at http://localhost:5173.
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm run dev`
