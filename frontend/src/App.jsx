@@ -44,11 +44,12 @@ function App() {
 
 
   return (
-    <div>
+    // <div>
 
-      <header className="fixed top-0 left-0 right-0 w-full bg-primary-light flex justify-between items-center p-4 text-customText-primary z-10">
+      <>
+      <header className="fixed top-0 left-0 right-0 w-full bg-primary-light flex justify-between items-center  p-4 text-customText-primary z-10">
 
-        <div className='font-bold'>
+        <div className='font-bold lg:'>
           <h1 className="">cX Logo</h1>
         </div>
 
@@ -86,10 +87,10 @@ function App() {
           </ul>
         </nav>
       </header>
-      <main>
+      <main className='pt-16'>
         <Outlet />
-      </main>
-    </div>
+      </main></>
+    // </div>
   );
 }
 
