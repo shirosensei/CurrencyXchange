@@ -7,8 +7,8 @@ export default {
   ],
   theme: {
     colors : {
-      // transparent: 'transparent',
-      // current: 'currentColor',
+      transparent: 'transparent',
+      current: 'currentColor',
         primary : {
           dark: '#0C2D48', //moonblue
           light : '#00192E'
@@ -18,9 +18,9 @@ export default {
           light: '#145DA0',
           dark: '#02427E'
         },
-        customText : {
+        text : {
           primary: '#FFFF',
-          secondary: '#FFEECF'        
+          secondary: '#333'        
         },
         customGreen: '#10B981',
         error: '#EA4335',
