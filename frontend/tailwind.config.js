@@ -39,6 +39,20 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addBase, theme }) {
+      addBase({
+        ':root': {
+          '--primary-dark': theme('colors.primary.dark'),
+          '--primary-light': theme('colors.primary.light'),
+          '--secondary-color': theme('colors.secondary'),
+          '--background-light': theme('colors.background.light'),
+          '--background-dark': theme('colors.background-dark'),
+          '--text-light': theme('colors.text.primary'),
+          '--text-dark': theme('colors.text.secondary'),
+        }
+      })      
+    }
+  ],
 }
 
