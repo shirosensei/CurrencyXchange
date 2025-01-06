@@ -11,7 +11,7 @@ const Navbar = () => {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full bg-primary-light flex justify-between items-center  p-4 text-text-primary z-10">
+    <header className="fixed top-0 left-0 right-0 w-full bg-primary-light flex justify-between items-center  p-4 text-text-primary z-20">
 
         <div className='font-bold lg:2xl'>
           <Link to="/">          
@@ -38,11 +38,11 @@ const Navbar = () => {
             </li>
 
             <li className="p-4 lg:p-0 hover:bg-disabled">
-              <Link to="/login" onClick={() => handleNavClose(false)}>Login</Link>
+              <Link to="auth/login" onClick={() => handleNavClose(false)}>Login</Link>
             </li>
             <li className='p-4 lg:p-0 hover:bg-disabled'>
               <button className=' '>
-                <Link to="/register" onClick={() => handleNavClose(false)}>Register</Link>
+                <Link to="auth/register" onClick={() => handleNavClose(false)}>Register</Link>
               </button>
             </li>
 
