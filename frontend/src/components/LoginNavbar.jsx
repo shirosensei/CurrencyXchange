@@ -1,4 +1,5 @@
 import React from "react";
+import LoginLayout from "./LoginLayout";
 
 const LoginNavbar = () => {
   return (
@@ -39,4 +40,6 @@ const LoginNavbar = () => {
   );
 };
 
+
 export default LoginNavbar;
+
